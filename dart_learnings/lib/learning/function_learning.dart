@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 
 class FunctionLearning {
@@ -49,23 +50,47 @@ class FunctionLearning {
     print(numbers);
   }
 
-  void arrangeNumberInDescending(List<int> numbers) {
-    // [1, 34, -1, -33, 2, 3, 8, 90]
-    for (var i = 0; i < numbers.length; i++) {
-      for (var j = i + 1; j < numbers.length; j++) {
-        if (numbers[i] < numbers[j]) {
-          var smallestNumber = numbers[i];
-          numbers[i] = numbers[j];
-          numbers[j] = smallestNumber;
-        }
-      }
-    }
-    print(numbers);
-  }
+  // void arrangeNumberInDescending(List<int> numbers) {
+  //   // [1, 34, -1, -33, 2, 3, 8, 90]
+  //   for (var i = 0; i < numbers.length; i++) {
+  //     for (var j = i + 1; j < numbers.length; j++) {
+  //       if (numbers[i] < numbers[j]) {
+  //         var smallestNumber = numbers[i];
+  //         numbers[i] = numbers[j];
+  //         numbers[j] = smallestNumber;
+  //       }
+  //     }
+  //   }
+  //   print(numbers);
+  // }
 
   //use of math class for arranging number on ascending number
   void arrangeNumber(List<int> numbers) {
     numbers.sort();
     print(numbers);
+  }
+
+  takeInputAndArragneAscOrder({int lengthOfList = 5}) {
+    List<int> numbers = [];
+    for (var i = 0; i < lengthOfList; i++) {
+      stdout.write("Enter number ${i + 1}: ");
+      int? number = int.parse(stdin.readLineSync()!);
+      numbers.add(number);
+    }
+    List<int> ascendingOrder = calculateAscendingOrder(numbers);
+    print("Ascending order of inserted number is : $ascendingOrder");
+  }
+
+  List<int> calculateAscendingOrder(List<int> numbers) {
+    for (var i = 0; i < numbers.length; i++) {
+      for (var j = i + 1; j < numbers.length; j++) {
+        if (numbers[i] > numbers[j]) {
+          var temp = numbers[i];
+          numbers[i] = numbers[j];
+          numbers[j] = temp;
+        }
+      }
+    }
+    return numbers;
   }
 }
